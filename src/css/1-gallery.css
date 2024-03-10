@@ -1,0 +1,22 @@
+img {
+    display: block;
+    width: 360px;
+    height: 200px;
+    transition: transform 0.3s ease-in-out; 
+}
+
+.modal img {
+    width: 1112px;
+    height: 640px;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+.gallery {
+    flex-wrap: wrap;
+    display: flex;
+    list-style: none;
+    gap: 24px;
+    justify-content: center;
+}
