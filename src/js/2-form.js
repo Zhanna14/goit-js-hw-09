@@ -12,6 +12,13 @@ function formSubmitSend(event) {
     message: text,
   });
   localStorage.setItem(feedbackFormState, data);
+
+  // Очищаємо поля форми
+  textarea.value = '';
+  feedbackForm.elements.email.value = '';
+
+  // Виводимо об'єкт з полями email та message у консоль
+  console.log({ email: userEmail, message: text });
 }
 
 // Відстежуємо подію submit на формі
@@ -19,20 +26,15 @@ feedbackForm.addEventListener('submit', formSubmitSend);
 
 // Функція для завантаження даних з локального сховища
 function loadFromLocalStorage() {
-  try {
-    const storedData = localStorage.getItem(feedbackFormState);
-    if (storedData) {
-      const formData = JSON.parse(storedData);
-      textarea.value = formData.message;
-      feedbackForm.elements.email.value = formData.email;
-    } else {
-      feedbackForm.elements.email.value = '';
-      textarea.value = '';
-    }
-  } catch (error) {
-      console.log(
-          'no saved data'
-    );
+
+  const storedData = localStorage.getItem(feedbackFormState);
+  if (storedData) {
+    const formData = JSON.parse(storedData);
+    textarea.value = formData.message;
+    feedbackForm.elements.email.value = formData.email;
+  } else {
+    feedbackForm.elements.email.value = '';
+    textarea.value = '';
   }
 }
 
