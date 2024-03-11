@@ -2,31 +2,30 @@ const feedbackForm = document.querySelector('.feedback-form');
 const textarea = feedbackForm.querySelector('textarea');
 const feedbackFormState = 'feedback-form-state';
 
-// Функція для збереження даних в локальному сховищі
 function formSubmitSend(event) {
   event.preventDefault();
-  const userEmail = feedbackForm.elements.email.value; // Отримуємо значення email тут, щоб воно було актуальним під час натискання на кнопку відправки форми
-  const text = textarea.value;
+  const userEmail = feedbackForm.elements.email.value.trim();
+  const text = textarea.value.trim();
+  if (!userEmail || !text) {
+    console.log('Будь ласка, заповніть обидва поля форми.');
+    return;
+  }
+
   const data = JSON.stringify({
     email: userEmail,
     message: text,
   });
   localStorage.setItem(feedbackFormState, data);
 
-  // Очищаємо поля форми
   textarea.value = '';
   feedbackForm.elements.email.value = '';
 
-  // Виводимо об'єкт з полями email та message у консоль
-  console.log({ email: userEmail, message: text });
+  console.log({ email: userEmail, message: text }); // Виводимо об'єкт у консоль
 }
 
-// Відстежуємо подію submit на формі
 feedbackForm.addEventListener('submit', formSubmitSend);
 
-// Функція для завантаження даних з локального сховища
 function loadFromLocalStorage() {
-
   const storedData = localStorage.getItem(feedbackFormState);
   if (storedData) {
     const formData = JSON.parse(storedData);
@@ -38,5 +37,4 @@ function loadFromLocalStorage() {
   }
 }
 
-// Завантажуємо збережені дані з локального сховища при завантаженні сторінки
 loadFromLocalStorage();
