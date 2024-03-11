@@ -95,13 +95,11 @@ function handleModalOpen(event) {
   event.preventDefault();
 
   if (event.target.nodeName !== 'IMG') return; // Перевірка, чи клікнуто на зображення
-  
+
   const instance = new SimpleLightbox('.gallery a', {
     captions: true, // включення зоюраження підпису
     captionDelay: 250, // зображення підпису за 250 ms
     captionsData: 'alt', // підпис зображення
     close: true, // відкриття модального вікна
   });
-  
-
 }
