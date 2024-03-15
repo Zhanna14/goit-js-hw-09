@@ -81,7 +81,6 @@ function galleryMarkup(arr) {
 		<img 
 			class="gallery-image" 
 			src="${preview}" 
-            data-source="${original}"
 			alt="${description}" 
 			/>
 	</a>
@@ -91,8 +90,6 @@ function galleryMarkup(arr) {
 }
 
 const instance = new SimpleLightbox('.gallery a', {
-  captions: true, // включення зоюраження підпису
   captionDelay: 250, // зображення підпису за 250 ms
   captionsData: 'alt', // підпис зображення
-  close: true, // відкриття модального вікна
 });
