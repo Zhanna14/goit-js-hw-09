@@ -70,7 +70,6 @@ const images = [
 ];
 
 const gallery = document.querySelector('.gallery');
-gallery.addEventListener('click', handleModalOpen);
 gallery.insertAdjacentHTML('beforeend', galleryMarkup(images));
 
 function galleryMarkup(arr) {
@@ -91,15 +90,9 @@ function galleryMarkup(arr) {
     .join('');
 }
 
-function handleModalOpen(event) {
-  event.preventDefault();
-
-  if (event.target.nodeName !== 'IMG') return; // Перевірка, чи клікнуто на зображення
-
-  const instance = new SimpleLightbox('.gallery a', {
-    captions: true, // включення зоюраження підпису
-    captionDelay: 250, // зображення підпису за 250 ms
-    captionsData: 'alt', // підпис зображення
-    close: true, // відкриття модального вікна
-  });
-}
+const instance = new SimpleLightbox('.gallery a', {
+  captions: true, // включення зоюраження підпису
+  captionDelay: 250, // зображення підпису за 250 ms
+  captionsData: 'alt', // підпис зображення
+  close: true, // відкриття модального вікна
+});
