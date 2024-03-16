@@ -72,8 +72,8 @@ const images = [
 const gallery = document.querySelector('.gallery');
 gallery.insertAdjacentHTML('beforeend', galleryMarkup(images));
 
-function galleryMarkup(arr) {
-  return arr
+function galleryMarkup(images) {
+  return images
     .map(
       ({ preview, original, description }) => `
       <li class="gallery-item">

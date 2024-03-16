@@ -4,8 +4,7 @@ const userEmail = feedbackForm.elements.email;
 const feedbackFormState = 'feedback-form-state';
 
 // Додаємо обробник події input на поля форми, щоб зберігати дані у локальному сховищі при кожному введенні
-userEmail.addEventListener('input', saveToLocalStorage);
-textarea.addEventListener('input', saveToLocalStorage);
+feedbackForm.addEventListener('input', saveToLocalStorage);
 
 function saveToLocalStorage() {
   const email = userEmail.value.trim(); // Отримуємо значення email і видаляємо пробіли
@@ -38,12 +37,13 @@ function formSubmitSend(event) {
     message: text,
   });
 
-  localStorage.setItem(feedbackFormState, data); // зберігаємо дані
-
   // Виводимо об'єкт з полями email та message у консоль
-  console.log({ email: email, message: text });
+  console.log(data);
 
-  feedbackForm.reset();
+  // Очищаємо локальне сховище
+  localStorage.removeItem(feedbackFormState);
+
+  feedbackForm.reset(); // Скидаємо форму
 }
 
 function loadFromLocalStorage() {
@@ -54,12 +54,8 @@ function loadFromLocalStorage() {
     const formData = JSON.parse(storedData);
 
     // Встановлюємо значення полів форми відповідно до даних з локального сховища
-    textarea.value = formData.message.trim();
-    feedbackForm.elements.email.value = formData.email.trim();
-  } else {
-    // Якщо дані відсутні, очищуємо поля форми
-    feedbackForm.elements.email.value = '';
-    textarea.value = '';
+    textarea.value = formData.message;
+    feedbackForm.elements.email.value = formData.email;
   }
 }
 
